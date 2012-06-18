@@ -1,3 +1,12 @@
+/*!
+* jQuery Cookie Plugin
+* https://github.com/vinhchung/jquery.cookie
+*
+* Copyright 2012, Vinh Chung
+* Licensed under the MIT
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
 (function ($) {   
    $.cookieHelper = {
         value : '',	
