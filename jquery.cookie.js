@@ -9,7 +9,7 @@
 			return this;
 		    }
 		}
-		return;
+		return this;
 	},
 	set: function (name, value, options) {       	
 		if(!name || !value) { return };
