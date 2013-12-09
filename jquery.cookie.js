@@ -11,7 +11,7 @@
    $.cookieHelper = {
         value : '',	
         get: function (name) {
-		var cookies = document.cookie.split(';'), cookie, i=-1;
+		var cookies = document.cookie.split(';'), cookie, i=-1, this.value = '';
 		for(;cookie=cookies[++i] && cookies[i].split('=');) {
 		    if($.trim(cookie[0]) === name) {
 		        this.value = cookie.length > 2 ? cookie.slice(1).join('=') : cookie[1];
@@ -22,12 +22,15 @@
 	},
 	set: function (name, value, options) {       	
 		if(!name || !value) { return };
-		options = $.extend({expires: -1, path: '', domain: ''}, options)
+		options = $.extend({expires: -1, path: '/', domain: ''}, options)
 		if (typeof options.expires === 'number') {
 			var offset = options.expires, dateTime = options.expires = new Date();
 			dateTime.setDate(dateTime.getDate() + offset);
 		}		
-		return document.cookie = [name + '=' + value, 'expires=' + options.expires, 'domain=' + options.domain, 'path=' + options.path, options.secure ? 'secure' : ''].join(';');
+		return document.cookie = [name + '=' + value, options.expires ? '; expires=' + options.expires.toUTCString() : '',
+                options.path ? '; path=' + options.path : '',
+                options.domain ? '; domain=' + options.domain : '',
+                options.secure ? '; secure' : ''].join('');;
 	},
 	attr: function (name) {
 	    var pairs = this.value.split('&'), keyvaluepair, pair, i=-1;
